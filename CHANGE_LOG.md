@@ -1,5 +1,55 @@
 # Changelog
 
+## [v3.0.12] - 2026-09-09
+
+### Changed
+- **Performance: `get_storage_backend()` now caches and reuses backend instances**
+  instead of constructing a new one on every call.
+
+  `LocalStorageBackend.__init__()` is essentially free (path resolution only), but
+  `S3StorageBackend.__init__()` builds a boto3 client and performs a live
+  `head_bucket()` connectivity check against the configured bucket - a real network
+  round-trip. Several downstream packages call `get_storage_backend()` many times
+  per logical operation (once per settings read, write, or existence check, and
+  again on every entity reload within a multi-step workflow), so each one was
+  paying for the same connectivity check repeatedly within a single request or
+  automation run. Observed in practice via `planmatic_datamart`: a single
+  extract-transform-load pass over one file against an S3-backed workspace
+  triggered roughly 30 backend constructions, each with its own `head_bucket()`
+  round-trip.
+
+  The cache is keyed by content - `(workspace_id, mode, json.dumps(the
+  mode-specific storage config, sort_keys=True))` - not by `workspace_config`'s
+  object identity and not by `workspace_id` alone. Every known caller constructs a
+  fresh `WorkspaceManager` and a fresh resolved-config dict per call, so an
+  identity-keyed cache would never hit in practice; and `S3StorageBackend` defaults
+  its `prefix` to `workspace_id` when `storage.s3.prefix` is unset, so two
+  workspaces with identical `storage.s3` blocks but different ids must not be
+  allowed to share a backend (or one workspace's writes could land in another's S3
+  prefix). This is the property the new unit tests in
+  `tests/unit/test_storage_backend_cache.py` check directly.
+
+  The cache is bounded and LRU (`_BACKEND_CACHE_MAXSIZE`, default 64 distinct
+  configurations) so a long-running, multi-tenant process cannot grow it without
+  limit, and a failed backend construction is never cached - the next call for
+  that configuration retries from scratch rather than replaying the failure.
+
+  One deliberate, documented behavior change: `S3StorageBackend`'s connectivity
+  check previously ran on every call to `get_storage_backend()`, so a bucket
+  becoming unreachable mid-process would surface immediately at the next call. It
+  now only runs when a configuration is first constructed (a cache miss); after
+  that, a connectivity problem surfaces at the next actual `read_file`/`write_file`
+  call instead of at `get_storage_backend()` itself. New `clear_storage_backend_cache()`
+  forces fresh backends process-wide when needed - most notably after rotating
+  credentials that a cached backend has no way to notice on its own (static
+  `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` env vars are read once at client
+  construction and not re-read afterward; profile- and IAM-role-based credentials
+  refresh themselves via boto3 and do not need this).
+
+  Purely additive/non-breaking: no consumer inspected holds a backend across calls
+  or relies on `get_storage_backend()` returning a distinct instance each time, and
+  bad configuration still raises `StorageError` synchronously on first use.
+
 ## [v3.0.11] - 2026-09-04
 
 ### Added

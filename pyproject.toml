@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mediaplanpy"
-version = "3.0.11"
+version = "3.0.12"
 description = "Python SDK for Media Plan Open Data Standard"
 readme = "README.md"
 authors = [
