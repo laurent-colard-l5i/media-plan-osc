@@ -53,6 +53,8 @@ MediaPlanPy is a Python SDK for working with media plans that follow the MediaPl
 - Format handlers for JSON, Excel, and Parquet files
 - `read_mediaplan()` and `write_mediaplan()` are the main entry points
 - Storage configuration is managed through workspace settings
+- `get_storage_backend()` caches and reuses backend instances (v3.0.12) - see "Storage
+  Backend Caching" below before adding a new call site or a new backend type
 
 **Workspace Management (`src/mediaplanpy/workspace/`)**
 - Multi-environment configuration system
@@ -121,6 +123,36 @@ MediaPlanPy is a Python SDK for working with media plans that follow the MediaPl
 - This is not an implementation shortcut — it is the only semantics the storage model
   can express. Do not "fix" it by inventing a campaign record.
 
+**Storage Backend Caching (v3.0.12)**
+- `get_storage_backend()` used to construct a brand-new backend on every call.
+  `LocalStorageBackend.__init__` is free (just path resolution), but
+  `S3StorageBackend.__init__` builds a boto3 client and performs a live
+  `head_bucket()` connectivity check - a real network round-trip. Several
+  downstream packages call `get_storage_backend()` many times per logical
+  operation (every settings read/write, every entity reload), so each one paid
+  for the same connectivity check repeatedly within a single request.
+- The cache lives in `mediaplanpy/storage/__init__.py`, module-level (not on
+  `WorkspaceManager`), because every known caller constructs a fresh
+  `WorkspaceManager` and a fresh resolved-config dict per call - an
+  instance-scoped or identity-keyed cache would never hit in practice.
+- **Cache key is content, not identity or `workspace_id` alone**: `(workspace_id,
+  mode, json.dumps(storage_config[mode], sort_keys=True))`. `workspace_id` is
+  included even though it lives outside `storage.*` because `S3StorageBackend`
+  defaults its `prefix` to `workspace_id` when `storage.s3.prefix` is unset -
+  two workspaces with identical `storage.s3` blocks but different ids must not
+  share a backend. If a backend class is added whose behavior depends on a
+  config field outside `storage.<mode>` and `workspace_id`, the cache key must
+  be extended to cover it or that field will be silently ignored for caching
+  purposes - this is the one thing to check before adding a new backend type.
+- Bounded + LRU (`_BACKEND_CACHE_MAXSIZE`, default 64) so a long-running
+  multi-tenant server can't grow this cache without limit. A failed
+  construction is never cached - the next call retries from scratch.
+- `clear_storage_backend_cache()` forces fresh instances process-wide. Needed
+  after rotating credentials a cached backend has no way to notice on its own
+  (static env-var credentials aren't re-read after client construction;
+  profile- and IAM-role-based credentials refresh themselves and don't need
+  this).
+
 **Database Integration**
 - PostgreSQL integration is optional (requires `psycopg2-binary`)
 - Database functionality is patched into MediaPlan models when available
@@ -134,7 +166,7 @@ MediaPlanPy is a Python SDK for working with media plans that follow the MediaPl
 ## Configuration
 
 **Version Information**
-- Current SDK version: 3.0.11
+- Current SDK version: 3.0.12
 - Current schema version: 3.0
 - Supported major versions: [2, 3]
 
