@@ -46,10 +46,10 @@ from mediaplanpy.models import MediaPlan
 # ============================================================================
 
 # Workspace ID - Copy from examples_create_workspace.py output
-WORKSPACE_ID = "workspace_xxxxxxxx"
+WORKSPACE_ID = "workspace_b92ee88b"
 
 # Media Plan ID - Copy from examples_create_mediaplan.py output
-MEDIAPLAN_ID = "mp_xxxxxxxx"
+MEDIAPLAN_ID = "mediaplan_865f445e"
 
 # ============================================================================
 

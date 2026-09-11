@@ -42,7 +42,7 @@ from mediaplanpy.models import MediaPlan
 # ============================================================================
 
 # Copy the "Workspace ID" from examples_create_workspace.py output
-WORKSPACE_ID = "workspace_xxxxxxxx"
+WORKSPACE_ID = "workspace_b92ee88b"
 
 # ============================================================================
 
@@ -530,6 +530,7 @@ def manage_plan_versions(manager):
         meta_name,
         meta_parent_id,
         meta_is_current,
+        meta_created_at,
         campaign_budget_total
     FROM {{*}}
     WHERE campaign_id = '{campaign_id}'

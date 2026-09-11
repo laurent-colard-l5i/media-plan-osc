@@ -43,11 +43,11 @@ from mediaplanpy import __schema_version__
 
 # Example 1: Load by Path
 # Copy the "Settings file" path from examples_create_workspace.py output
-WORKSPACE_SETTINGS_PATH = "C:/mediaplanpy/workspace_xxxxxxxx_settings.json"
+WORKSPACE_SETTINGS_PATH = "C:/mediaplanpy/workspace_b92ee88b_settings.json"
 
 # Example 2: Load by Workspace ID
 # Copy the "Workspace ID" from examples_create_workspace.py output
-WORKSPACE_ID = "workspace_xxxxxxxx"
+WORKSPACE_ID = "workspace_b92ee88b"
 
 # ============================================================================
 

@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "id": "mediaplan_7c4b3297",
+    "schema_version": "v3.0",
+    "created_by_name": "Examples",
+    "created_at": "2026-04-06T16:49:32.868564",
+    "name": "Formula Demo - Progressive Learning",
+    "parent_id": "mediaplan_5266ddd7"
+  },
+  "campaign": {
+    "id": "camp_001",
+    "name": "Q1 2025 Campaign",
+    "start_date": "2025-01-01",
+    "end_date": "2025-03-31",
+    "budget_total": 20000.0
+  },
+  "lineitems": [
+    {
+      "id": "li_001",
+      "name": "Display - Premium Sites",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 6000.0,
+      "metric_impressions": 937500.0,
+      "metric_clicks": 18750.0,
+      "metric_conversions": 1875.0,
+      "metric_formulas": {
+        "metric_conversions": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_clicks",
+          "coefficient": 0.1
+        },
+        "metric_impressions": {
+          "formula_type": "cost_per_unit",
+          "base_metric": "cost_total",
+          "coefficient": 0.0064,
+          "comments": "Further negotiated CPM"
+        },
+        "metric_clicks": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_impressions",
+          "coefficient": 0.02
+        }
+      }
+    },
+    {
+      "id": "li_002",
+      "name": "Display - Standard Sites",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 6000.0,
+      "metric_impressions": 600000.0,
+      "metric_clicks": 22471.91011235955,
+      "metric_conversions": 1498.1273408239701,
+      "metric_formulas": {
+        "metric_conversions": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_clicks",
+          "coefficient": 0.06666666666666667
+        },
+        "metric_impressions": {
+          "formula_type": "cost_per_unit",
+          "base_metric": "cost_total",
+          "coefficient": 0.01
+        },
+        "metric_clicks": {
+          "formula_type": "cost_per_unit",
+          "base_metric": "cost_total",
+          "coefficient": 0.267,
+          "comments": "Standard placement uses CPC pricing model"
+        }
+      }
+    }
+  ],
+  "dictionary": {
+    "standard_metrics": {
+      "metric_clicks": {
+        "formula_type": "conversion_rate",
+        "base_metric": "metric_impressions"
+      },
+      "metric_conversions": {
+        "formula_type": "conversion_rate",
+        "base_metric": "metric_clicks"
+      }
+    }
+  }
+}

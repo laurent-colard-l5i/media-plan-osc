@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "id": "mediaplan_d5aba02c",
+    "schema_version": "v3.0",
+    "created_by_name": "BMc with Claude Cowork",
+    "created_at": "2026-03-17T13:23:03.077327",
+    "name": "BMc Test Campaign Q2 2026"
+  },
+  "campaign": {
+    "id": "campaign_ef7b86f1",
+    "name": "BMc Test Campaign Q2 2026",
+    "start_date": "2026-04-01",
+    "end_date": "2026-06-30",
+    "budget_total": 200000.0,
+    "objective": "awareness"
+  },
+  "lineitems": [
+    {
+      "id": "pli_c2bb843a",
+      "name": "Paid Social - Meta Feed Ads",
+      "start_date": "2026-04-01",
+      "end_date": "2026-06-30",
+      "cost_total": 55000.0,
+      "channel": "Paid Social",
+      "adformat": "Feed Ads"
+    },
+    {
+      "id": "pli_0efdce65",
+      "name": "Paid Social - LinkedIn Sponsored Content",
+      "start_date": "2026-04-01",
+      "end_date": "2026-06-30",
+      "cost_total": 45000.0,
+      "channel": "Paid Social",
+      "adformat": "Sponsored Content"
+    },
+    {
+      "id": "pli_83a567dd",
+      "name": "Paid Social - TikTok In-Feed Video",
+      "start_date": "2026-04-01",
+      "end_date": "2026-06-30",
+      "cost_total": 30000.0,
+      "channel": "Paid Social",
+      "adformat": "In-Feed Video"
+    },
+    {
+      "id": "pli_a597ac1a",
+      "name": "Video - Pre-Roll",
+      "start_date": "2026-04-01",
+      "end_date": "2026-06-30",
+      "cost_total": 40000.0,
+      "channel": "Video",
+      "adformat": "Pre-Roll"
+    },
+    {
+      "id": "pli_418adcaf",
+      "name": "Video - Connected TV",
+      "start_date": "2026-04-01",
+      "end_date": "2026-06-30",
+      "cost_total": 15000.0,
+      "channel": "Video",
+      "adformat": "Connected TV"
+    },
+    {
+      "id": "pli_8eac23f3",
+      "name": "Programmatic Display",
+      "start_date": "2026-04-01",
+      "end_date": "2026-06-30",
+      "cost_total": 15000.0,
+      "channel": "Display",
+      "adformat": "Programmatic"
+    }
+  ]
+}

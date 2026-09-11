@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "id": "mediaplan_00ffc8c6",
+    "schema_version": "v3.0",
+    "created_by_name": "examples_user",
+    "created_at": "2026-04-06T12:36:35.377671",
+    "name": "plan_v1",
+    "is_current": false
+  },
+  "campaign": {
+    "id": "campaign_d127355d",
+    "name": "Version Control Campaign",
+    "start_date": "2025-01-01",
+    "end_date": "2025-06-30",
+    "budget_total": 50000.0,
+    "objective": "Demonstrate version management"
+  },
+  "lineitems": [
+    {
+      "id": "pli_76968fd0",
+      "name": "Social Media Line Item",
+      "start_date": "2025-01-01",
+      "end_date": "2025-06-30",
+      "cost_total": 20000.0
+    }
+  ]
+}

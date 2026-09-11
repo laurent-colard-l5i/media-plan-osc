@@ -1,0 +1,250 @@
+{
+  "meta": {
+    "id": "mediaplan_2e571cf0",
+    "schema_version": "v3.0",
+    "created_by_name": "examples_user",
+    "created_at": "2026-03-10T18:20:28.329081",
+    "name": "Advanced v3.0 Feature Showcase (Updated 2026-03-10 18:20)",
+    "comments": "Updated basic properties - budget and objective changes",
+    "is_current": false,
+    "parent_id": "mediaplan_5cb7dc59",
+    "dim_custom1": "Strategic Initiative - Digital Transformation",
+    "custom_properties": {
+      "approval_status": "approved",
+      "budget_source": "marketing_operations",
+      "internal_id": "ENT-2025-Q1-001"
+    }
+  },
+  "campaign": {
+    "id": "campaign_06b0dc46",
+    "name": "Q1 2025 Enterprise Technology Campaign",
+    "start_date": "2025-01-01",
+    "end_date": "2025-03-31",
+    "budget_total": 92000.0,
+    "objective": "Brand Awareness and Consideration",
+    "target_audiences": [
+      {
+        "name": "Tech-Savvy Millennials (Updated)",
+        "description": "Updated audience with expanded age range",
+        "demo_age_start": 25,
+        "demo_age_end": 55,
+        "demo_gender": "Any",
+        "demo_attributes": "Income: $75k+, Education: College+, Urban",
+        "interest_attributes": "Technology, Innovation, Startups, AI, Cloud Computing",
+        "extension_approach": "lookalike",
+        "population_size": 5500000
+      },
+      {
+        "name": "Business Decision Makers",
+        "description": "C-level executives and senior managers",
+        "demo_age_start": 35,
+        "demo_age_end": 65,
+        "demo_gender": "Any",
+        "demo_attributes": "Income: $150k+, Job Title: C-Level, VP, Director",
+        "population_size": 800000
+      },
+      {
+        "name": "Millennials - Tech Enthusiasts",
+        "description": "Young professionals interested in technology and innovation",
+        "demo_age_start": 28,
+        "demo_age_end": 42,
+        "demo_gender": "Any",
+        "demo_attributes": "Income: $80k+, Education: College+, Urban dwellers",
+        "interest_attributes": "Technology, Innovation, Gadgets, Software, AI",
+        "intent_attributes": "High purchase intent for tech products",
+        "purchase_attributes": "Recent tech purchases, High online spending",
+        "extension_approach": "Lookalike modeling based on seed audience",
+        "population_size": 3200000
+      }
+    ],
+    "target_locations": [
+      {
+        "name": "Major US Metro Areas (Expanded)",
+        "description": "Expanded to include additional markets",
+        "location_type": "DMA",
+        "location_list": [
+          "New York",
+          "Los Angeles",
+          "Chicago",
+          "San Francisco",
+          "Boston",
+          "Texas",
+          "Florida"
+        ],
+        "population_percent": 0.35
+      },
+      {
+        "name": "Tech Hub Cities",
+        "description": "Cities with high concentration of tech companies",
+        "location_type": "DMA",
+        "location_list": [
+          "Seattle",
+          "Austin",
+          "Denver",
+          "Portland"
+        ],
+        "exclusion_list": [
+          "Rural areas"
+        ],
+        "population_percent": 0.15
+      },
+      {
+        "name": "National Coverage",
+        "description": "Nationwide reach with urban focus",
+        "location_type": "Country",
+        "location_list": [
+          "United States"
+        ],
+        "exclusion_type": "State",
+        "exclusion_list": [
+          "Alaska",
+          "Hawaii"
+        ],
+        "population_percent": 0.95
+      },
+      {
+        "name": "West Coast Markets",
+        "description": "Major metropolitan areas on the West Coast",
+        "location_type": "State",
+        "location_list": [
+          "California",
+          "Oregon",
+          "Washington"
+        ],
+        "population_percent": 0.85
+      }
+    ],
+    "kpi_name1": "Brand Awareness Lift",
+    "kpi_value1": 15.5,
+    "kpi_name2": "Purchase Intent Increase",
+    "kpi_value2": 22.0,
+    "kpi_name3": "Website Traffic Growth",
+    "kpi_value3": 35000.0,
+    "dim_custom1": "Tech Products Division",
+    "dim_custom2": "Q2 2025",
+    "custom_properties": {
+      "campaign_manager": "Jane Smith",
+      "agency_partner": "Digital Agency Inc",
+      "tracking_code": "UTM_Q1_2025_ENT",
+      "last_updated": "2026-03-10 18:20:28",
+      "updated_by": "Data Science Team",
+      "optimization_status": "In Progress"
+    }
+  },
+  "lineitems": [
+    {
+      "id": "pli_fec3039e",
+      "name": "Digital Display - Programmatic",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 50000.0,
+      "channel": "Digital",
+      "adformat": "Programmatic Display",
+      "cost_currency": "USD",
+      "dim_custom1": "Audience: Tech Millennials",
+      "cost_custom1": 2500.0,
+      "metric_impressions": 6250.0,
+      "metric_clicks": 62.5,
+      "metric_engagements": 150000.0,
+      "metric_custom1": 85000.0,
+      "buy_type": "Programmatic",
+      "buy_commitment": "Non-guaranteed",
+      "cost_currency_exchange_rate": 1.0,
+      "cost_minimum": 45000.0,
+      "cost_maximum": 55000.0,
+      "metric_view_starts": 3000000.0,
+      "metric_view_completions": 2400000.0,
+      "metric_reach": 2000000.0,
+      "metric_formulas": {
+        "metric_clicks": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_impressions",
+          "coefficient": 0.01,
+          "comments": "Click-through rate calculation - lineitem override"
+        },
+        "metric_impressions": {
+          "formula_type": "cost_per_unit",
+          "base_metric": "cost_total",
+          "coefficient": 8.0,
+          "comments": "CPM calculation - lineitem override"
+        }
+      },
+      "custom_properties": {
+        "creative_type": "video",
+        "optimization_goal": "reach",
+        "bidding_strategy": "CPM",
+        "targeting_expansion": true,
+        "optimization_round": "2",
+        "performance_tier": "High"
+      }
+    },
+    {
+      "id": "pli_e43f0980",
+      "name": "Social Media - Feed Ads",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 30000.0,
+      "channel": "Social",
+      "adformat": "Feed Ads",
+      "dim_custom1": "Audience: Business Leaders",
+      "metric_impressions": 8000000.0,
+      "metric_clicks": 160000.0,
+      "metric_engagements": 400000.0,
+      "buy_type": "Direct",
+      "buy_commitment": "Guaranteed",
+      "cost_minimum": 28000.0,
+      "cost_maximum": 32000.0,
+      "metric_reach": 3000000.0,
+      "metric_formulas": {
+        "metric_clicks": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_impressions",
+          "coefficient": 0.01
+        }
+      },
+      "custom_properties": {
+        "platform": "linkedin",
+        "ad_format": "sponsored_content",
+        "targeting_method": "account_based"
+      }
+    }
+  ],
+  "dictionary": {
+    "meta_custom_dimensions": {
+      "dim_custom1": {
+        "status": "enabled",
+        "caption": "Business Unit"
+      }
+    },
+    "campaign_custom_dimensions": {
+      "dim_custom1": {
+        "status": "enabled",
+        "caption": "Campaign Type"
+      }
+    },
+    "lineitem_custom_dimensions": {
+      "dim_custom1": {
+        "status": "enabled",
+        "caption": "Audience Segment"
+      }
+    },
+    "standard_metrics": {
+      "metric_clicks": {
+        "formula_type": "conversion_rate",
+        "base_metric": "metric_impressions"
+      }
+    },
+    "custom_metrics": {
+      "metric_custom1": {
+        "status": "enabled",
+        "caption": "Video 50% Views"
+      }
+    },
+    "custom_costs": {
+      "cost_custom1": {
+        "status": "enabled",
+        "caption": "Agency Fees"
+      }
+    }
+  }
+}

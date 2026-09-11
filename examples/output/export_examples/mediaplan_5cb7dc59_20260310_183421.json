@@ -1,0 +1,205 @@
+{
+  "meta": {
+    "id": "mediaplan_5cb7dc59",
+    "schema_version": "v3.0",
+    "created_by_name": "examples_user",
+    "created_at": "2026-03-10T18:03:18.980016",
+    "name": "Advanced v3.0 Feature Showcase (Updated 2026-03-10 18:20)",
+    "comments": "Updated basic properties - budget and objective changes",
+    "dim_custom1": "Business Unit: Enterprise Sales",
+    "custom_properties": {
+      "approval_status": "approved",
+      "budget_source": "marketing_operations",
+      "internal_id": "ENT-2025-Q1-001"
+    }
+  },
+  "campaign": {
+    "id": "campaign_06b0dc46",
+    "name": "Q1 2025 Enterprise Technology Campaign",
+    "start_date": "2025-01-01",
+    "end_date": "2025-03-31",
+    "budget_total": 92000.0,
+    "objective": "Brand Awareness and Consideration",
+    "target_audiences": [
+      {
+        "name": "Tech-Savvy Millennials",
+        "description": "Young professionals interested in technology and innovation",
+        "demo_age_start": 25,
+        "demo_age_end": 40,
+        "demo_gender": "Any",
+        "demo_attributes": "Income: $75k+, Education: College+, Urban",
+        "interest_attributes": "Technology, Innovation, Startups, AI, Cloud Computing",
+        "extension_approach": "lookalike",
+        "population_size": 2500000
+      },
+      {
+        "name": "Business Decision Makers",
+        "description": "C-level executives and senior managers",
+        "demo_age_start": 35,
+        "demo_age_end": 65,
+        "demo_gender": "Any",
+        "demo_attributes": "Income: $150k+, Job Title: C-Level, VP, Director",
+        "population_size": 800000
+      }
+    ],
+    "target_locations": [
+      {
+        "name": "Major US Metro Areas",
+        "description": "Top 5 US metropolitan markets",
+        "location_type": "DMA",
+        "location_list": [
+          "New York",
+          "Los Angeles",
+          "Chicago",
+          "San Francisco",
+          "Boston"
+        ],
+        "population_percent": 0.35
+      },
+      {
+        "name": "Tech Hub Cities",
+        "description": "Cities with high concentration of tech companies",
+        "location_type": "DMA",
+        "location_list": [
+          "Seattle",
+          "Austin",
+          "Denver",
+          "Portland"
+        ],
+        "exclusion_list": [
+          "Rural areas"
+        ],
+        "population_percent": 0.15
+      },
+      {
+        "name": "National Coverage",
+        "description": "Nationwide reach with urban focus",
+        "location_type": "Country",
+        "location_list": [
+          "United States"
+        ],
+        "exclusion_type": "State",
+        "exclusion_list": [
+          "Alaska",
+          "Hawaii"
+        ],
+        "population_percent": 0.95
+      }
+    ],
+    "kpi_name1": "CTR",
+    "kpi_value1": 2.5,
+    "dim_custom1": "Campaign Type: Brand Awareness + Lead Gen",
+    "custom_properties": {
+      "campaign_manager": "Jane Smith",
+      "agency_partner": "Digital Agency Inc",
+      "tracking_code": "UTM_Q1_2025_ENT"
+    }
+  },
+  "lineitems": [
+    {
+      "id": "pli_fec3039e",
+      "name": "Digital Display - Programmatic",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 50000.0,
+      "channel": "Digital",
+      "adformat": "Programmatic Display",
+      "cost_currency": "USD",
+      "dim_custom1": "Audience: Tech Millennials",
+      "cost_custom1": 2500.0,
+      "metric_impressions": 5000000.0,
+      "metric_clicks": 100000.0,
+      "metric_engagements": 150000.0,
+      "metric_custom1": 85000.0,
+      "buy_type": "Programmatic",
+      "buy_commitment": "Non-guaranteed",
+      "cost_currency_exchange_rate": 1.0,
+      "cost_minimum": 45000.0,
+      "cost_maximum": 55000.0,
+      "metric_view_starts": 3000000.0,
+      "metric_view_completions": 2400000.0,
+      "metric_reach": 2000000.0,
+      "metric_formulas": {
+        "metric_clicks": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_impressions",
+          "coefficient": 0.01
+        }
+      },
+      "custom_properties": {
+        "creative_type": "video",
+        "optimization_goal": "reach",
+        "bidding_strategy": "CPM",
+        "targeting_expansion": true
+      }
+    },
+    {
+      "id": "pli_e43f0980",
+      "name": "Social Media - Feed Ads",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 30000.0,
+      "channel": "Social",
+      "adformat": "Feed Ads",
+      "dim_custom1": "Audience: Business Leaders",
+      "metric_impressions": 8000000.0,
+      "metric_clicks": 160000.0,
+      "metric_engagements": 400000.0,
+      "buy_type": "Direct",
+      "buy_commitment": "Guaranteed",
+      "cost_minimum": 28000.0,
+      "cost_maximum": 32000.0,
+      "metric_reach": 3000000.0,
+      "metric_formulas": {
+        "metric_clicks": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_impressions",
+          "coefficient": 0.01
+        }
+      },
+      "custom_properties": {
+        "platform": "linkedin",
+        "ad_format": "sponsored_content",
+        "targeting_method": "account_based"
+      }
+    }
+  ],
+  "dictionary": {
+    "meta_custom_dimensions": {
+      "dim_custom1": {
+        "status": "enabled",
+        "caption": "Business Unit"
+      }
+    },
+    "campaign_custom_dimensions": {
+      "dim_custom1": {
+        "status": "enabled",
+        "caption": "Campaign Type"
+      }
+    },
+    "lineitem_custom_dimensions": {
+      "dim_custom1": {
+        "status": "enabled",
+        "caption": "Audience Segment"
+      }
+    },
+    "standard_metrics": {
+      "metric_clicks": {
+        "formula_type": "conversion_rate",
+        "base_metric": "metric_impressions"
+      }
+    },
+    "custom_metrics": {
+      "metric_custom1": {
+        "status": "enabled",
+        "caption": "Video 50% Views"
+      }
+    },
+    "custom_costs": {
+      "cost_custom1": {
+        "status": "enabled",
+        "caption": "Agency Fees"
+      }
+    }
+  }
+}

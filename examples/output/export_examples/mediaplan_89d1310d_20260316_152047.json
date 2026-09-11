@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "id": "mediaplan_89d1310d",
+    "schema_version": "v3.0",
+    "created_by_name": "examples_user",
+    "created_at": "2026-03-10T18:03:18.927030",
+    "name": "Q1 2025 Complex Media Plan"
+  },
+  "campaign": {
+    "id": "campaign_c4018fee",
+    "name": "Q1 2025 Multi-Channel Campaign",
+    "start_date": "2025-01-01",
+    "end_date": "2025-03-31",
+    "budget_total": 100000.0,
+    "objective": "awareness"
+  },
+  "lineitems": [
+    {
+      "id": "pli_1c49b83b",
+      "name": "Digital - Banner",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Digital",
+      "adformat": "Banner",
+      "metric_impressions": 100000.0,
+      "metric_clicks": 2000.0
+    },
+    {
+      "id": "pli_a1dfd389",
+      "name": "Digital - Video",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Digital",
+      "adformat": "Video",
+      "metric_impressions": 200000.0,
+      "metric_clicks": 4000.0
+    },
+    {
+      "id": "pli_b8bb6f54",
+      "name": "Digital - Native",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Digital",
+      "adformat": "Native",
+      "metric_impressions": 300000.0,
+      "metric_clicks": 6000.0
+    },
+    {
+      "id": "pli_d3e53a44",
+      "name": "Social - Feed",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Social",
+      "adformat": "Feed",
+      "metric_impressions": 400000.0,
+      "metric_clicks": 8000.0
+    },
+    {
+      "id": "pli_bf6a7437",
+      "name": "Social - Stories",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Social",
+      "adformat": "Stories",
+      "metric_impressions": 500000.0,
+      "metric_clicks": 10000.0
+    },
+    {
+      "id": "pli_4691384d",
+      "name": "Social - Reels",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Social",
+      "adformat": "Reels",
+      "metric_impressions": 600000.0,
+      "metric_clicks": 12000.0
+    },
+    {
+      "id": "pli_45000912",
+      "name": "Search - Brand",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Search",
+      "adformat": "Brand",
+      "metric_impressions": 700000.0,
+      "metric_clicks": 14000.0
+    },
+    {
+      "id": "pli_836471f5",
+      "name": "Search - Generic",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Search",
+      "adformat": "Generic",
+      "metric_impressions": 800000.0,
+      "metric_clicks": 16000.0
+    },
+    {
+      "id": "pli_51186dcc",
+      "name": "Search - Product",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Search",
+      "adformat": "Product",
+      "metric_impressions": 900000.0,
+      "metric_clicks": 18000.0
+    },
+    {
+      "id": "pli_4f381c0b",
+      "name": "Display - Programmatic",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Display",
+      "adformat": "Programmatic",
+      "metric_impressions": 1000000.0,
+      "metric_clicks": 20000.0
+    },
+    {
+      "id": "pli_ef47d92c",
+      "name": "Display - Direct",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Display",
+      "adformat": "Direct",
+      "metric_impressions": 1100000.0,
+      "metric_clicks": 22000.0
+    },
+    {
+      "id": "pli_90d74e19",
+      "name": "Display - Retargeting",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 8333.333333333334,
+      "channel": "Display",
+      "adformat": "Retargeting",
+      "metric_impressions": 1200000.0,
+      "metric_clicks": 24000.0
+    }
+  ]
+}

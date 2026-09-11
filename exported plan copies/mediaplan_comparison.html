@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Media Plan Comparison</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;color:#1a2233;background:#eef1f6}
+
+/* header */
+.hdr{background:linear-gradient(135deg,#1a2233,#2c3e6b);color:#fff;padding:1.5rem 2rem}
+.hdr h1{font-size:1.3rem;font-weight:700}
+.hdr p{color:#a8b8d8;font-size:.8rem;margin-top:.25rem}
+.hdr-meta{display:flex;gap:2rem;margin-top:1rem;flex-wrap:wrap}
+.hdr-meta span{font-size:.75rem;color:#7a9cc8}
+.hdr-meta strong{color:#fff;font-weight:600}
+
+/* legend */
+.lgnd{background:#fff;border-bottom:1px solid #dde3ec;padding:.5rem 2rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;font-size:.75rem}
+.pill{display:inline-flex;align-items:center;gap:.3rem;padding:.15rem .6rem;border-radius:999px;font-weight:700;font-size:.7rem}
+.pill.prev{background:#d6e4f5;color:#2a5ea7;border:1.5px solid #4F81BD}
+.pill.curr{background:#fbe4e4;color:#a02020;border:1.5px solid #C0504D}
+.pill.add{background:#e8f5e9;color:#2e7d32;border:1.5px solid #66bb6a}
+.pill.chg{background:#fff8e1;color:#7a5000;border:1.5px solid #ffb300}
+
+/* layout */
+.wrap{max-width:1100px;margin:0 auto;padding:1.5rem 1rem;display:flex;flex-direction:column;gap:1.25rem}
+.card{background:#fff;border-radius:8px;border:1px solid #dde3ec;box-shadow:0 1px 3px rgba(0,0,0,.05);overflow:hidden}
+.card-hdr{padding:.75rem 1.25rem;border-bottom:1px solid #dde3ec;display:flex;align-items:baseline;gap:.75rem}
+.card-hdr h2{font-size:.9rem;font-weight:700}
+.card-hdr .sub{font-size:.75rem;color:#6b7a94}
+.card-body{padding:1.25rem}
+
+/* summary grid */
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.75rem}
+.sum-cell{border-radius:6px;padding:.75rem 1rem;border:1px solid #dde3ec}
+.sum-cell.chg{background:#fff8e1;border-color:#ffb300}
+.sum-cell .lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#6b7a94;margin-bottom:.25rem}
+.sum-cell .prev-v{font-size:.75rem;color:#6b7a94}
+.sum-cell .curr-v{font-size:.95rem;font-weight:700}
+.sum-cell .delta{font-size:.72rem;margin-top:.2rem}
+.up{color:#2e7d32}.dn{color:#c62828}.eq{color:#6b7a94}
+
+/* 2-col diff */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.col-hdr{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;padding-bottom:.4rem;border-bottom:2px solid;margin-bottom:.75rem}
+.prev-hdr{color:#2a5ea7;border-color:#4F81BD}
+.curr-hdr{color:#a02020;border-color:#C0504D}
+
+/* audience rows */
+.aud{border-radius:6px;padding:.65rem .9rem;margin-bottom:.5rem;border-left:3px solid}
+.aud.unch{background:#f5f7fa;border-color:#90a4ae}
+.aud.chg{background:#fff8e1;border-color:#ffb300}
+.aud.add{background:#e8f5e9;border-color:#66bb6a}
+.aud .name{font-weight:700;margin-bottom:.3rem;font-size:.85rem}
+.aud .attrs{color:#6b7a94;font-size:.75rem;display:flex;flex-wrap:wrap;gap:.25rem}
+.aud .attrs span{background:rgba(0,0,0,.05);border-radius:3px;padding:.1rem .4rem}
+.aud .attrs span.hi{background:#fff3cd;color:#856404}
+.aud .attrs span.hi-g{background:#d4edda;color:#155724}
+.bdg{display:inline-block;font-size:.64rem;font-weight:700;text-transform:uppercase;padding:.08rem .4rem;border-radius:999px;vertical-align:middle;margin-left:.3rem}
+.bdg.add{background:#e8f5e9;color:#2e7d32;border:1px solid #66bb6a}
+.bdg.chg{background:#fff8e1;color:#7a5000;border:1px solid #ffb300}
+
+/* location */
+.loc-group{margin-bottom:.9rem}
+.loc-group:last-child{margin-bottom:0}
+.loc-name{font-weight:700;font-size:.82rem;margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+.loc-type{font-size:.68rem;background:#e3e9f4;color:#3a5080;border-radius:3px;padding:.08rem .4rem}
+.loc-pct{font-size:.7rem;color:#6b7a94}
+.tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.tag{font-size:.7rem;padding:.1rem .45rem;border-radius:4px;border:1px solid}
+.tag.n{background:#e8edf8;border-color:#aabde0;color:#2a4a80}
+.tag.a{background:#e8f5e9;border-color:#66bb6a;color:#2e7d32}
+.tag.x{background:#fce4ec;border-color:#f48fb1;color:#880e4f;font-style:italic}
+.loc-new{background:#e8f5e9;border:1px solid #66bb6a;border-radius:6px;padding:.6rem .85rem;margin-bottom:.5rem}
+
+/* kpi row */
+.kpi-row{display:flex;gap:.75rem;flex-wrap:wrap}
+.kpi-c{border-radius:6px;padding:.65rem 1rem;flex:1;min-width:160px;border:1px solid #dde3ec}
+.kpi-c.chg{background:#fff8e1;border-color:#ffb300}
+.kpi-c.add{background:#e8f5e9;border-color:#66bb6a}
+.kpi-c .kn{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7a94;margin-bottom:.25rem}
+.kpi-c .kv{font-size:.95rem;font-weight:700}
+.kpi-c .kp{font-size:.72rem;color:#6b7a94;margin-top:.15rem}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:.82rem}
+.tbl th{background:#f5f7fa;padding:.5rem .85rem;text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7a94;border-bottom:2px solid #dde3ec}
+.tbl td{padding:.6rem .85rem;border-bottom:1px solid #dde3ec;vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .num{text-align:right;font-variant-numeric:tabular-nums}
+.tbl .tot{background:#f5f7fa;font-weight:700}
+.tbl .row-chg{background:#fffde7}
+.vp{display:block;font-size:.72rem;color:#6b7a94}
+.vd{font-size:.7rem}
+.ch{display:inline-block;font-size:.7rem;font-weight:700;padding:.1rem .45rem;border-radius:4px}
+.ch-d{background:#e3f2fd;color:#0d47a1}
+.ch-s{background:#f3e5f5;color:#6a1b9a}
+.warn-row td{padding:.35rem .85rem}
+.warn{background:#fff8e1;border:1px solid #ffb300;border-radius:5px;padding:.5rem .75rem;font-size:.75rem;color:#7a5000}
+
+/* charts */
+.ch-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+@media(max-width:700px){.ch-grid,.two-col{grid-template-columns:1fr}}
+.ch-wrap{position:relative;height:240px}
+.ch-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7a94;margin-bottom:.6rem}
+
+/* footer */
+footer{text-align:center;font-size:.72rem;color:#6b7a94;padding:1.25rem}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <h1>Media Plan Comparison</h1>
+  <p>Q1 2025 Enterprise Technology Campaign — Version Diff</p>
+  <div class="hdr-meta">
+    <div><span>Previous &nbsp;</span><strong>mediaplan_5cb7dc59</strong></div>
+    <div><span>Current &nbsp;</span><strong>mediaplan_7695a631</strong> <span>(is_current)</span></div>
+    <div><span>Schema &nbsp;</span><strong>v3.0 both</strong></div>
+    <div><span>Generated &nbsp;</span><strong>2026-03-10</strong></div>
+  </div>
+</div>
+
+<div class="lgnd">
+  <strong style="font-size:.75rem">Legend:</strong>
+  <span class="pill prev">◆ Previous</span>
+  <span class="pill curr">◆ Current</span>
+  <span class="pill add">+ Added</span>
+  <span class="pill chg">~ Changed</span>
+</div>
+
+<div class="wrap">
+
+  <!-- ── 1. Campaign Overview ── -->
+  <div class="card">
+    <div class="card-hdr"><h2>Campaign Overview</h2><span class="sub">Key campaign-level changes</span></div>
+    <div class="card-body">
+      <div class="sum-grid">
+        <div class="sum-cell chg">
+          <div class="lbl">Total Budget</div>
+          <div class="prev-v">Prev: $92,000</div>
+          <div class="curr-v">$101,200</div>
+          <div class="delta up">▲ +$9,200 (+10.0%)</div>
+        </div>
+        <div class="sum-cell">
+          <div class="lbl">Flight Dates</div>
+          <div class="curr-v" style="font-size:.85rem">Jan 1 – Mar 31, 2025</div>
+          <div class="delta eq">Unchanged</div>
+        </div>
+        <div class="sum-cell">
+          <div class="lbl">Objective</div>
+          <div class="curr-v" style="font-size:.82rem">Brand Awareness &amp; Consideration</div>
+          <div class="delta eq">Unchanged</div>
+        </div>
+        <div class="sum-cell chg">
+          <div class="lbl">Business Unit (Meta)</div>
+          <div class="prev-v">Enterprise Sales</div>
+          <div class="curr-v" style="font-size:.82rem">Digital Transformation</div>
+          <div class="delta eq">~ Changed</div>
+        </div>
+        <div class="sum-cell">
+          <div class="lbl">Channels</div>
+          <div class="curr-v">Digital, Social</div>
+          <div class="delta eq">Unchanged (2 channels)</div>
+        </div>
+        <div class="sum-cell">
+          <div class="lbl">Agency</div>
+          <div class="curr-v">Digital Agency Inc</div>
+          <div class="delta eq">Unchanged</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. Audiences ── -->
+  <div class="card">
+    <div class="card-hdr">
+      <h2>Target Audiences</h2>
+      <span class="sub">2 → 3 segments &nbsp;·&nbsp; 1 modified, 1 added &nbsp;·&nbsp; Total reachable pop: 3.3M → 9.5M</span>
+    </div>
+    <div class="card-body">
+      <div class="two-col">
+        <div>
+          <div class="col-hdr prev-hdr">Previous</div>
+          <div class="aud chg">
+            <div class="name">Tech-Savvy Millennials</div>
+            <div class="attrs"><span>Age 25–40</span><span>Pop 2.5M</span><span>Lookalike</span></div>
+          </div>
+          <div class="aud unch">
+            <div class="name">Business Decision Makers</div>
+            <div class="attrs"><span>Age 35–65</span><span>Pop 800K</span><span>C-Level/VP</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="col-hdr curr-hdr">Current</div>
+          <div class="aud chg">
+            <div class="name">Tech-Savvy Millennials (Updated)<span class="bdg chg">~ changed</span></div>
+            <div class="attrs">
+              <span class="hi">Age 25–55 ↑ (was 25–40)</span>
+              <span class="hi-g">Pop 5.5M ↑ (was 2.5M)</span>
+              <span>Lookalike</span>
+            </div>
+          </div>
+          <div class="aud unch">
+            <div class="name">Business Decision Makers</div>
+            <div class="attrs"><span>Age 35–65</span><span>Pop 800K</span><span>C-Level/VP</span></div>
+          </div>
+          <div class="aud add">
+            <div class="name">Millennials – Tech Enthusiasts<span class="bdg add">+ new</span></div>
+            <div class="attrs">
+              <span>Age 28–42</span><span>Pop 3.2M</span><span>Lookalike</span>
+              <span>High purchase intent</span><span>Income $80k+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. Locations ── -->
+  <div class="card">
+    <div class="card-hdr">
+      <h2>Target Locations</h2>
+      <span class="sub">3 → 4 groups &nbsp;·&nbsp; 1 expanded, 1 added</span>
+    </div>
+    <div class="card-body">
+      <div class="two-col">
+        <div>
+          <div class="col-hdr prev-hdr">Previous</div>
+          <div class="loc-group">
+            <div class="loc-name">Major US Metro Areas <span class="loc-type">DMA</span><span class="loc-pct">35%</span></div>
+            <div class="tags">
+              <span class="tag n">New York</span><span class="tag n">Los Angeles</span>
+              <span class="tag n">Chicago</span><span class="tag n">San Francisco</span><span class="tag n">Boston</span>
+            </div>
+          </div>
+          <div class="loc-group">
+            <div class="loc-name">Tech Hub Cities <span class="loc-type">DMA</span><span class="loc-pct">15%</span></div>
+            <div class="tags">
+              <span class="tag n">Seattle</span><span class="tag n">Austin</span>
+              <span class="tag n">Denver</span><span class="tag n">Portland</span>
+              <span class="tag x">✕ Rural areas</span>
+            </div>
+          </div>
+          <div class="loc-group">
+            <div class="loc-name">National Coverage <span class="loc-type">Country</span><span class="loc-pct">95%</span></div>
+            <div class="tags">
+              <span class="tag n">United States</span>
+              <span class="tag x">✕ Alaska</span><span class="tag x">✕ Hawaii</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="col-hdr curr-hdr">Current</div>
+          <div class="loc-group">
+            <div class="loc-name">Major US Metro Areas (Expanded) <span class="loc-type">DMA</span><span class="loc-pct">35%</span><span class="bdg chg">~ expanded</span></div>
+            <div class="tags">
+              <span class="tag n">New York</span><span class="tag n">Los Angeles</span>
+              <span class="tag n">Chicago</span><span class="tag n">San Francisco</span><span class="tag n">Boston</span>
+              <span class="tag a">+ Texas</span><span class="tag a">+ Florida</span>
+            </div>
+          </div>
+          <div class="loc-group">
+            <div class="loc-name">Tech Hub Cities <span class="loc-type">DMA</span><span class="loc-pct">15%</span></div>
+            <div class="tags">
+              <span class="tag n">Seattle</span><span class="tag n">Austin</span>
+              <span class="tag n">Denver</span><span class="tag n">Portland</span>
+              <span class="tag x">✕ Rural areas</span>
+            </div>
+          </div>
+          <div class="loc-group">
+            <div class="loc-name">National Coverage <span class="loc-type">Country</span><span class="loc-pct">95%</span></div>
+            <div class="tags">
+              <span class="tag n">United States</span>
+              <span class="tag x">✕ Alaska</span><span class="tag x">✕ Hawaii</span>
+            </div>
+          </div>
+          <div class="loc-new">
+            <div class="loc-name">West Coast Markets <span class="loc-type">State</span><span class="loc-pct">85%</span><span class="bdg add">+ new</span></div>
+            <div class="tags">
+              <span class="tag a">California</span><span class="tag a">Oregon</span><span class="tag a">Washington</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. KPIs ── -->
+  <div class="card">
+    <div class="card-hdr"><h2>Campaign KPIs</h2><span class="sub">Expanded from 1 → 3 KPIs; primary KPI redefined</span></div>
+    <div class="card-body">
+      <div class="kpi-row">
+        <div class="kpi-c chg">
+          <div class="kn">KPI 1 <span class="bdg chg">~ changed</span></div>
+          <div class="kv">Brand Awareness Lift: 15.5%</div>
+          <div class="kp">Prev: CTR = 2.5%</div>
+        </div>
+        <div class="kpi-c add">
+          <div class="kn">KPI 2 <span class="bdg add">+ new</span></div>
+          <div class="kv">Purchase Intent Increase: 22%</div>
+        </div>
+        <div class="kpi-c add">
+          <div class="kn">KPI 3 <span class="bdg add">+ new</span></div>
+          <div class="kv">Website Traffic Growth: 35,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. Line Items ── -->
+  <div class="card">
+    <div class="card-hdr"><h2>Line Items</h2><span class="sub">Spend unchanged · Digital impressions differ due to formula override in current version</span></div>
+    <div class="card-body" style="padding:0">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Line Item</th>
+            <th>Channel</th>
+            <th class="num">Spend</th>
+            <th class="num">Impressions</th>
+            <th class="num">Clicks</th>
+            <th class="num">Engagements</th>
+            <th class="num">Reach</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-chg">
+            <td><strong>Digital Display – Programmatic</strong><br/><span class="vp">Programmatic / Non-guaranteed</span></td>
+            <td><span class="ch ch-d">Digital</span></td>
+            <td class="num"><strong>$50,000</strong><span class="vp">Unchanged</span></td>
+            <td class="num"><strong>6,250</strong><span class="vp">Prev: 5,000,000</span><span class="vd dn">▼ −99.9%*</span></td>
+            <td class="num"><strong>62.5</strong><span class="vp">Prev: 100,000</span><span class="vd dn">▼ −99.9%*</span></td>
+            <td class="num"><strong>150,000</strong><span class="vp">Unchanged</span></td>
+            <td class="num"><strong>2,000,000</strong><span class="vp">Unchanged</span></td>
+          </tr>
+          <tr class="warn-row">
+            <td colspan="7"><div class="warn">* Formula override: current version applies a <em>cost_per_unit</em> formula (cost ÷ 8 = 6,250 impressions). Review whether stored or formula-computed values reflect planned delivery.</div></td>
+          </tr>
+          <tr>
+            <td><strong>Social Media – Feed Ads</strong><br/><span class="vp">Direct / Guaranteed · LinkedIn</span></td>
+            <td><span class="ch ch-s">Social</span></td>
+            <td class="num"><strong>$30,000</strong><span class="vp">Unchanged</span></td>
+            <td class="num"><strong>8,000,000</strong><span class="vp">Unchanged</span></td>
+            <td class="num"><strong>160,000</strong><span class="vp">Unchanged</span></td>
+            <td class="num"><strong>400,000</strong><span class="vp">Unchanged</span></td>
+            <td class="num"><strong>3,000,000</strong><span class="vp">Unchanged</span></td>
+          </tr>
+          <tr class="tot">
+            <td>TOTAL</td><td></td>
+            <td class="num">$80,000 <span class="vp eq">Unchanged</span></td>
+            <td class="num">8,006,250 <span class="vp">Prev: 13,000,000</span></td>
+            <td class="num">160,062.5 <span class="vp">Prev: 260,000</span></td>
+            <td class="num">550,000 <span class="vp eq">Unchanged</span></td>
+            <td class="num">5,000,000 <span class="vp eq">Unchanged</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── 6. Charts ── -->
+  <div class="card">
+    <div class="card-hdr"><h2>Spend, Impressions &amp; Clicks by Channel</h2><span class="sub">Previous vs. Current</span></div>
+    <div class="card-body">
+      <div class="ch-grid">
+        <div>
+          <div class="ch-title">Spend (USD)</div>
+          <div class="ch-wrap"><canvas id="cSpend"></canvas></div>
+        </div>
+        <div>
+          <div class="ch-title">Impressions</div>
+          <div class="ch-wrap"><canvas id="cImpr"></canvas></div>
+        </div>
+        <div>
+          <div class="ch-title">Clicks</div>
+          <div class="ch-wrap"><canvas id="cClicks"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>mediaplan_5cb7dc59 (previous) vs. mediaplan_7695a631 (current) · MediaPlanPy SDK v3.0 · Schema v3.0</footer>
+
+<script>
+const P='rgba(79,129,189,0.75)',PC='#4F81BD',C='rgba(192,80,77,0.75)',CC='#C0504D';
+const channels=['Digital','Social'];
+const font={family:"'Segoe UI',system-ui,sans-serif",size:11};
+const opts=(yLabel)=>({
+  responsive:true,maintainAspectRatio:false,
+  plugins:{
+    legend:{position:'bottom',labels:{font,boxWidth:12,padding:10}},
+    tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString()}`}}
+  },
+  scales:{
+    x:{ticks:{font},grid:{display:false}},
+    y:{beginAtZero:true,title:{display:true,text:yLabel,font},ticks:{font}}
+  }
+});
+const ds=(label,data,bg,border)=>({label,data,backgroundColor:bg,borderColor:border,borderWidth:1.5,borderRadius:3});
+
+new Chart(document.getElementById('cSpend'),{
+  type:'bar',
+  data:{labels:channels,datasets:[ds('Previous',[50000,30000],P,PC),ds('Current',[50000,30000],C,CC)]},
+  options:{...opts('USD ($)'),plugins:{...opts().plugins,tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}`}}}}
+});
+
+new Chart(document.getElementById('cImpr'),{
+  type:'bar',
+  data:{labels:channels,datasets:[ds('Previous',[5000000,8000000],P,PC),ds('Current',[6250,8000000],C,CC)]},
+  options:opts('Impressions')
+});
+
+new Chart(document.getElementById('cClicks'),{
+  type:'bar',
+  data:{labels:channels,datasets:[ds('Previous',[100000,160000],P,PC),ds('Current',[62.5,160000],C,CC)]},
+  options:opts('Clicks')
+});
+</script>
+</body>
+</html>

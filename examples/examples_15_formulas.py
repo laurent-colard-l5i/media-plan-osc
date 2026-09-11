@@ -46,7 +46,7 @@ from mediaplanpy.models.metric_formula import MetricFormula
 # ============================================================================
 
 # Workspace ID for saving media plans
-WORKSPACE_ID = "workspace_xxxxxxxx"
+WORKSPACE_ID = "workspace_b92ee88b"
 
 # ============================================================================
 

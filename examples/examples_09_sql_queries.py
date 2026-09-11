@@ -43,7 +43,7 @@ from mediaplanpy.workspace import WorkspaceManager
 # ============================================================================
 
 # Copy the "Workspace ID" from examples_create_workspace.py output
-WORKSPACE_ID = "workspace_xxxxxxxx"
+WORKSPACE_ID = "workspace_b92ee88b"
 
 # ============================================================================
 

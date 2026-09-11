@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "id": "mediaplan_7b29049f",
+    "schema_version": "v3.0",
+    "created_by_name": "examples_user",
+    "created_at": "2026-04-06T12:36:35.911078",
+    "name": "plan_v3",
+    "is_current": true,
+    "parent_id": "mediaplan_b6a2b42a"
+  },
+  "campaign": {
+    "id": "campaign_d127355d",
+    "name": "Version Control Campaign",
+    "start_date": "2025-01-01",
+    "end_date": "2025-06-30",
+    "budget_total": 75000.0,
+    "objective": "Demonstrate version management"
+  },
+  "lineitems": [
+    {
+      "id": "pli_76968fd0",
+      "name": "Social Media Line Item (Updated)",
+      "start_date": "2025-01-01",
+      "end_date": "2025-06-30",
+      "cost_total": 25000.0,
+      "channel": "social",
+      "dim_custom1": "Premium Brands",
+      "dim_custom2": "Awareness Campaign",
+      "dim_custom3": "Q1 2025",
+      "dim_custom4": "North America",
+      "dim_custom5": "Q1 2025",
+      "cost_custom1": 2000.0,
+      "cost_custom2": 1500.0,
+      "cost_custom3": 500.0,
+      "metric_impressions": 1000000.0,
+      "metric_clicks": 25000.0,
+      "metric_views": 800000.0,
+      "metric_custom1": 15.5,
+      "metric_custom2": 87.3,
+      "metric_conversions": 1250.0,
+      "metric_formulas": {
+        "metric_impressions": {
+          "formula_type": "cost_per_unit",
+          "base_metric": "cost_total",
+          "coefficient": 8.0,
+          "comments": "metric_impressions = cost_total / cpm * 1000"
+        },
+        "metric_clicks": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_impressions",
+          "coefficient": 0.025,
+          "comments": "metric_clicks =  metric_impressions * CTR"
+        },
+        "metric_conversions": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_clicks",
+          "coefficient": 0.05,
+          "comments": "metric_comversions = metric_clicks"
+        }
+      },
+      "custom_properties": {
+        "campaign_tier": "premium",
+        "optimization_status": "active",
+        "targeting_strategy": "lookalike",
+        "created_by_tool": "MediaPlanPy v3.0",
+        "notes": "High-performing line item, monitor daily"
+      },
+      "metric_engagement": 50000.0
+    },
+    {
+      "id": "pli_5189966a",
+      "name": "Search Line Item",
+      "start_date": "2025-01-01",
+      "end_date": "2025-06-30",
+      "cost_total": 25000.0,
+      "dim_custom5": "Q1 2025"
+    },
+    {
+      "id": "pli_ef5e3b9e",
+      "name": "Display Line Item",
+      "start_date": "2025-01-01",
+      "end_date": "2025-06-30",
+      "cost_total": 30000.0,
+      "dim_custom5": "Q1 2025"
+    },
+    {
+      "id": "pli_d57cb4a6",
+      "name": "New Social Media Campaign",
+      "start_date": "2025-01-31",
+      "end_date": "2025-05-31",
+      "cost_total": 15000.0,
+      "channel": "social",
+      "cost_currency": "USD",
+      "dim_custom1": "Social Media",
+      "dim_custom2": "Consideration",
+      "dim_custom5": "Q1 2025",
+      "metric_impressions": 500000.0,
+      "metric_clicks": 10000.0,
+      "custom_properties": {
+        "platform": "Meta",
+        "format": "Video"
+      }
+    },
+    {
+      "id": "pli_99f78b31",
+      "name": "Simple Copy Example",
+      "start_date": "2025-01-01",
+      "end_date": "2025-06-30",
+      "cost_total": 25000.0,
+      "channel": "social",
+      "dim_custom1": "Premium Brands",
+      "dim_custom2": "Awareness Campaign",
+      "dim_custom3": "Q1 2025",
+      "dim_custom4": "North America",
+      "dim_custom5": "Q1 2025",
+      "cost_custom1": 2000.0,
+      "cost_custom2": 1500.0,
+      "cost_custom3": 500.0,
+      "metric_impressions": 1000000.0,
+      "metric_clicks": 25000.0,
+      "metric_views": 800000.0,
+      "metric_custom1": 15.5,
+      "metric_custom2": 87.3,
+      "metric_conversions": 1250.0,
+      "metric_formulas": {
+        "metric_impressions": {
+          "formula_type": "cost_per_unit",
+          "base_metric": "cost_total",
+          "coefficient": 8.0,
+          "comments": "metric_impressions = cost_total / cpm * 1000"
+        },
+        "metric_clicks": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_impressions",
+          "coefficient": 0.025,
+          "comments": "metric_clicks =  metric_impressions * CTR"
+        },
+        "metric_conversions": {
+          "formula_type": "conversion_rate",
+          "base_metric": "metric_clicks",
+          "coefficient": 0.05,
+          "comments": "metric_comversions = metric_clicks"
+        }
+      },
+      "custom_properties": {
+        "campaign_tier": "premium",
+        "optimization_status": "active",
+        "targeting_strategy": "lookalike",
+        "created_by_tool": "MediaPlanPy v3.0",
+        "notes": "High-performing line item, monitor daily"
+      },
+      "metric_engagement": 50000.0
+    }
+  ]
+}

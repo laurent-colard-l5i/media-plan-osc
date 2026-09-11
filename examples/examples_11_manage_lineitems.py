@@ -52,10 +52,10 @@ from mediaplanpy.models import MediaPlan, LineItem, MetricFormula
 # ============================================================================
 
 # Copy the "Workspace ID" from examples_01_create_workspace.py output
-WORKSPACE_ID = "workspace_xxxxxxxx"
+WORKSPACE_ID = "workspace_b92ee88b"
 
 # Copy a "Media plan ID" from examples_03_create_mediaplan.py output
-MEDIAPLAN_ID = "mediaplan_xxxxxxxx"
+MEDIAPLAN_ID = "mediaplan_7b29049f"
 
 # ============================================================================
 
@@ -434,7 +434,7 @@ def edit_lineitem_formulas(manager, plan):
     lineitem.metric_formulas["metric_impressions"] = MetricFormula(
         formula_type="cost_per_unit",
         base_metric="cost_total",
-        coefficient=8.0,
+        coefficient=0.008,
         comments="metric_impressions = cost_total / cpm * 1000"
     )
     print(f"   ✓ Added: CPM formula (coefficient=8.0)")

@@ -157,11 +157,11 @@ def create_minimal_hello_world_plan(manager):
     # Create the simplest possible media plan
     plan = MediaPlan.create(
         # Required parameters
-        campaign_name="My First Campaign",
+        campaign_name="BMc First Campaign",
         campaign_start_date="2025-01-01",
         campaign_end_date="2025-03-31",
-        campaign_budget_total=Decimal("10000.00"),
-        created_by_name="examples_user",
+        campaign_budget_total=Decimal("20000.00"),
+        created_by_name="Brian McManus",
 
         # Optional: Media plan name (uses campaign_name if not provided)
         media_plan_name="Hello World Media Plan",

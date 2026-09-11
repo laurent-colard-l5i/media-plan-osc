@@ -1,0 +1,265 @@
+{
+  "meta": {
+    "id": "mediaplan_3773ed1e",
+    "schema_version": "v3.0",
+    "created_by_name": "Brian McManus",
+    "created_at": "2026-03-17T14:36:56.413085",
+    "name": "BMc Duff Beer Promotion Media Plan",
+    "comments": "Test Excel import using the template from an older media plan",
+    "is_current": false,
+    "dim_custom1": "Strategic Initiative - Test this puppy out"
+  },
+  "campaign": {
+    "id": "campaign_1c0917ba",
+    "name": "BMc Duff Beer Promotion Campaign",
+    "start_date": "2025-01-01",
+    "end_date": "2025-03-31",
+    "budget_total": 50000.0,
+    "objective": "Conversion",
+    "target_audiences": [
+      {
+        "name": "Adult Beer Drinkers",
+        "description": "LDA compliant",
+        "demo_age_start": 21,
+        "demo_age_end": 55,
+        "demo_gender": "Any",
+        "interest_attributes": "Sports, Outdoor Activities",
+        "purchase_attributes": "Purchased Beer in last 3 months",
+        "population_size": 70000000
+      }
+    ],
+    "target_locations": [
+      {
+        "name": "National Coverage",
+        "description": "Nationwide",
+        "location_type": "Country",
+        "population_percent": 1.0
+      },
+      {
+        "name": "Southeastern States",
+        "description": "Three States in Southeast",
+        "location_type": "State",
+        "population_percent": 1.0
+      }
+    ]
+  },
+  "lineitems": [
+    {
+      "id": "pli_f470521e",
+      "name": "Paid Social - Meta",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 10000.0,
+      "channel": "Paid Social",
+      "adformat": "Feed Ads"
+    },
+    {
+      "id": "pli_ad7735e0",
+      "name": "Paid Social - TikTok",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 2500.0,
+      "channel": "Paid Social",
+      "adformat": "In-Feed Video"
+    },
+    {
+      "id": "pli_3e3fb011",
+      "name": "Retail - Sponsored Product Ads",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 25000.0,
+      "channel": "Retail",
+      "adformat": "Sponsored Product Ad"
+    },
+    {
+      "id": "pli_a4f70f3d",
+      "name": "CTV",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 10000.0,
+      "channel": "Video",
+      "adformat": "Connected TV"
+    },
+    {
+      "id": "pli_4bdaa367",
+      "name": "Programmatic Display",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-31",
+      "cost_total": 2500.0,
+      "channel": "Display",
+      "adformat": "Programmatic"
+    }
+  ],
+  "dictionary": {
+    "meta_custom_dimensions": {
+      "dim_custom1": {
+        "status": "enabled",
+        "caption": "Strategic Initiative"
+      },
+      "dim_custom2": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom3": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom4": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom5": {
+        "status": "disabled",
+        "caption": ""
+      }
+    },
+    "campaign_custom_dimensions": {
+      "dim_custom1": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom2": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom3": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom4": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom5": {
+        "status": "disabled",
+        "caption": ""
+      }
+    },
+    "lineitem_custom_dimensions": {
+      "dim_custom1": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom2": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom3": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom4": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom5": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom6": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom7": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom8": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom9": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "dim_custom10": {
+        "status": "disabled",
+        "caption": ""
+      }
+    },
+    "custom_metrics": {
+      "metric_custom1": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "metric_custom2": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "metric_custom3": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "metric_custom4": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "metric_custom5": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "metric_custom6": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "metric_custom7": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "metric_custom8": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "metric_custom9": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "metric_custom10": {
+        "status": "disabled",
+        "caption": ""
+      }
+    },
+    "custom_costs": {
+      "cost_custom1": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "cost_custom2": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "cost_custom3": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "cost_custom4": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "cost_custom5": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "cost_custom6": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "cost_custom7": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "cost_custom8": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "cost_custom9": {
+        "status": "disabled",
+        "caption": ""
+      },
+      "cost_custom10": {
+        "status": "disabled",
+        "caption": ""
+      }
+    }
+  }
+}
